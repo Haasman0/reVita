@@ -53,6 +53,7 @@ bool generateINISettings(char* buff){
 			// 	break;
 			case SETT_AUTOSAVE:
 			case SETT_REMAP_ENABLED:
+			case SETT_ANIMATION:
 			case POP_SAVE:
 			case POP_LOAD:
 			case POP_SECONDARY:
@@ -85,6 +86,7 @@ bool parseINISettings(char* buff){
 				break;
 			case SETT_AUTOSAVE:
 			case SETT_REMAP_ENABLED:
+			case SETT_ANIMATION:
 			case POP_SAVE:
 			case POP_LOAD:
 			case POP_SECONDARY:
