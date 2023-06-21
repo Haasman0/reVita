@@ -1109,20 +1109,26 @@ void remap_setup(){
 	
 	int mode;
     ksceCtrlGetSamplingMode(&mode);
-	if (mode == SCE_CTRL_MODE_DIGITAL)
+	if (mode == SCE_CTRL_MODE_DIGITAL) {
 		ksceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG_WIDE);
+	} else {
+		if (profile.entries[PR_AN_MODE_WIDE].v.b) {
+			ksceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG_WIDE);
+		} else {
+			ksceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
+		}
+	}
     ksceCtrlGetSamplingModeExt(&mode);
-	if (mode == SCE_CTRL_MODE_DIGITAL)
-		ksceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG_WIDE);
+	if (mode == SCE_CTRL_MODE_DIGITAL) {
+		ksceCtrlSetSamplingModeExt(SCE_CTRL_MODE_ANALOG_WIDE);
+	} else {
+		if (profile.entries[PR_AN_MODE_WIDE].v.b) {
+			ksceCtrlSetSamplingModeExt(SCE_CTRL_MODE_ANALOG_WIDE);
+		} else {
+			ksceCtrlSetSamplingModeExt(SCE_CTRL_MODE_ANALOG);
+		}
+	}
 
-	// if (profile.entries[PR_AN_MODE_WIDE].v.b){
-	// 	ksceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG_WIDE);
-	// 	ksceCtrlSetSamplingModeExt(SCE_CTRL_MODE_ANALOG_WIDE);
-	// } else {
-	// 	ksceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
-	// 	ksceCtrlSetSamplingModeExt(SCE_CTRL_MODE_ANALOG);
-	// }
-	
 	// Enabling both touch panels sampling
 	ksceTouchSetSamplingState(SCE_TOUCH_PORT_FRONT, SCE_TOUCH_SAMPLING_STATE_START);
 	ksceTouchSetSamplingState(SCE_TOUCH_PORT_BACK, SCE_TOUCH_SAMPLING_STATE_START);

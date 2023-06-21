@@ -4,7 +4,7 @@
 #include <psp2/touch.h>
 #include <psp2/appmgr.h>
 
-#define VERSION				"1.0.9"
+#define VERSION				"1.0.10"
 
 enum H_ID{
     sceCtrlPeekBufferPositive_id = 0,
