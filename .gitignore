@@ -50,3 +50,5 @@ build/*
 .vscode/*
 reVita/build/*
 reVitaMotion/build/*
+cmake-build*
+.idea/*
