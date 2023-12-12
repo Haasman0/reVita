@@ -269,6 +269,7 @@ void profile_resetAnalog(){
 	profile_resetEntryById(PR_AN_RIGHT_DEADZONE);
 	profile_resetEntryById(PR_AN_RIGHT_DEADZONE_X);
 	profile_resetEntryById(PR_AN_RIGHT_DEADZONE_Y);
+	profile_resetEntryById(PR_AN_RESCALE);
 	profile_resetEntryById(PR_AN_MODE_WIDE);
 }
 void profile_resetTouch(){
@@ -713,6 +714,11 @@ void setDefProfile(){
 		.min.u = 0,
 		.max.u = 127,
 		.key = "RightAnalogDeadzoneY"});
+	setPE((ProfileEntry){
+		.id = PR_AN_RESCALE,
+		.type = TYPE_BOOL,
+		.def.u = 1,
+		.key = "AnalogRescale"});
 
 	// Touch
 	setPE((ProfileEntry){

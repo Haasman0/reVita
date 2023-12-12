@@ -1,7 +1,6 @@
 #include <vitasdkkern.h>
 #include <psp2/motion.h> 
 #include <psp2/touch.h>
-#include <psp2/appmgr.h>
 #include <stdlib.h>
 
 #include "vitasdkext.h"
@@ -703,17 +702,39 @@ void applyRemap(SceCtrlData *ctrl, enum RULE_STATUS* statuses, bool* sticky, Sce
 	// Apply deadzone to propagated analogs
 	if (profile.entries[PR_AN_LEFT_DEADZONE].v.b 
 			|| (profile.entries[PR_GY_ANALOG_DEADZONE].v.b && rd.gyroAnalogDeadzones[LS])){
-		if (rd.analogLeftProp.left 	< profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) rd.analogLeftProp.left = 0;
-		if (rd.analogLeftProp.right < profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) rd.analogLeftProp.right = 0;
-		if (rd.analogLeftProp.up 	< profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) rd.analogLeftProp.up = 0;
-		if (rd.analogLeftProp.down 	< profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) rd.analogLeftProp.down = 0;
+		if (profile.entries[PR_AN_RESCALE].v.b) {
+			if (rd.analogLeftProp.left >= profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) rd.analogLeftProp.left = (uint32_t) ((float) rd.analogLeftProp.left - (float) profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) / ((float) (127 - profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) / 127.0f);
+			else rd.analogLeftProp.left = 0;
+			if (rd.analogLeftProp.right >= profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) rd.analogLeftProp.right = (uint32_t) ((float) rd.analogLeftProp.right - (float) profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) / ((float) (127 - profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) / 127.0f);
+			else rd.analogLeftProp.right = 0;
+			if (rd.analogLeftProp.up >= profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) rd.analogLeftProp.up = (uint32_t) ((float) rd.analogLeftProp.up - (float) profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) / ((float) (127 - profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) / 127.0f);
+			else rd.analogLeftProp.up = 0;
+			if (rd.analogLeftProp.down >= profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) rd.analogLeftProp.down = (uint32_t) ((float) rd.analogLeftProp.down - (float) profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) / ((float) (127 - profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) / 127.0f);
+			else rd.analogLeftProp.down = 0;
+		} else {
+			if (rd.analogLeftProp.left 	< profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) rd.analogLeftProp.left = 0;
+			if (rd.analogLeftProp.right < profile.entries[PR_AN_LEFT_DEADZONE_X].v.u) rd.analogLeftProp.right = 0;
+			if (rd.analogLeftProp.up 	< profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) rd.analogLeftProp.up = 0;
+			if (rd.analogLeftProp.down 	< profile.entries[PR_AN_LEFT_DEADZONE_Y].v.u) rd.analogLeftProp.down = 0;
+		}
 	}
 	if (profile.entries[PR_AN_RIGHT_DEADZONE].v.b 
 			|| (profile.entries[PR_GY_ANALOG_DEADZONE].v.b && rd.gyroAnalogDeadzones[RS])){
-		if (rd.analogRightProp.left < profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) rd.analogRightProp.left = 0;
-		if (rd.analogRightProp.right< profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) rd.analogRightProp.right = 0;
-		if (rd.analogRightProp.up 	< profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) rd.analogRightProp.up = 0;
-		if (rd.analogRightProp.down < profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) rd.analogRightProp.down = 0;
+		if (profile.entries[PR_AN_RESCALE].v.b) {
+			if (rd.analogRightProp.left >= profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) rd.analogRightProp.left = (uint32_t) ((float) rd.analogRightProp.left - (float) profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) / ((float) (127 - profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) / 127.0f);
+			else rd.analogRightProp.left = 0;
+			if (rd.analogRightProp.right >= profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) rd.analogRightProp.right = (uint32_t) ((float) rd.analogRightProp.right - (float) profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) / ((float) (127 - profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) / 127.0f);
+			else rd.analogRightProp.right = 0;
+			if (rd.analogRightProp.up >= profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) rd.analogRightProp.up = (uint32_t) ((float) rd.analogRightProp.up - (float) profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) / ((float) (127 - profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) / 127.0f);
+			else rd.analogRightProp.up = 0;
+			if (rd.analogRightProp.down >= profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) rd.analogRightProp.down = (uint32_t) ((float) rd.analogRightProp.down - (float) profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) / ((float) (127 - profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) / 127.0f);
+			else rd.analogRightProp.down = 0;
+		} else {
+			if (rd.analogRightProp.left < profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) rd.analogRightProp.left = 0;
+			if (rd.analogRightProp.right< profile.entries[PR_AN_RIGHT_DEADZONE_X].v.u) rd.analogRightProp.right = 0;
+			if (rd.analogRightProp.up 	< profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) rd.analogRightProp.up = 0;
+			if (rd.analogRightProp.down < profile.entries[PR_AN_RIGHT_DEADZONE_Y].v.u) rd.analogRightProp.down = 0;
+		}
 	}
 
 	// Restoring propagated values for analog sticks

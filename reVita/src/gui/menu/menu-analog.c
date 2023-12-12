@@ -23,7 +23,9 @@ static struct MenuEntry menu_analog_entries[] = {
 	(MenuEntry){.name = "Left Analog - Y Axis", .icn = ICON_LS_UP,.dataPE = &profile.entries[PR_AN_LEFT_DEADZONE_Y]},
 	(MenuEntry){.name = "Right Analog", .icn = ICON_RS_UP,  .dataPE = &profile.entries[PR_AN_RIGHT_DEADZONE]},
 	(MenuEntry){.name = "Right Analog - X Axis", .icn = ICON_RS_LEFT,  .dataPE = &profile.entries[PR_AN_RIGHT_DEADZONE_X]},
-	(MenuEntry){.name = "Right Analog - Y Axis", .icn = ICON_RS_UP,.dataPE = &profile.entries[PR_AN_RIGHT_DEADZONE_Y]}};
+	(MenuEntry){.name = "Right Analog - Y Axis", .icn = ICON_RS_UP,.dataPE = &profile.entries[PR_AN_RIGHT_DEADZONE_Y]},
+	(MenuEntry){.name = "Advanced", .type = HEADER_TYPE},
+	(MenuEntry){.name = "Rescale After Deadzone", .icn = ICON_CROSSHAIR, .dataPE = &profile.entries[PR_AN_RESCALE]},
 static struct Menu menu_analog = (Menu){
 	.id = MENU_ANALOG_ID, 
 	.parent = MENU_MAIN_PROFILE_ID,
