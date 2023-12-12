@@ -49,12 +49,12 @@ void onDraw_debugButtons(uint menuY){
 		ctrl.lt, ctrl.rt);
 	rendererv_drawStringF(L_1, y += CHA_H, "$U: [%i, %i], $u[%i, %i]", 
 		ctrl.lx, ctrl.ly, ctrl.rx, ctrl.ry);
-	rendererv_drawStringF(L_1, y += CHA_H, "reserved0 : [%i, %i, %i, %i]", 
-		ctrl.reserved0[0], ctrl.reserved0[1], ctrl.reserved0[2], ctrl.reserved0[3]);
-	rendererv_drawStringF(L_1, y += CHA_H, "reserved1 : [%i, %i, %i, %i, %i,", 
-		ctrl.reserved1[0], ctrl.reserved1[1], ctrl.reserved1[2], ctrl.reserved1[3], ctrl.reserved1[4]);
-	rendererv_drawStringF(L_1, y += CHA_H, "             %i, %i, %i, %i, %i]", 
-		ctrl.reserved1[5], ctrl.reserved1[6], ctrl.reserved1[7], ctrl.reserved1[8], ctrl.reserved1[9]);
+	rendererv_drawStringF(L_1, y += CHA_H, "reserved : [%i, %i, %i, %i]", 
+		ctrl.reserved[0], ctrl.reserved[1], ctrl.reserved[2], ctrl.reserved[3]);
+//	rendererv_drawStringF(L_1, y += CHA_H, "reserved1 : [%i, %i, %i, %i, %i,",
+//		ctrl.reserved1[0], ctrl.reserved1[1], ctrl.reserved1[2], ctrl.reserved1[3], ctrl.reserved1[4]);
+//	rendererv_drawStringF(L_1, y += CHA_H, "             %i, %i, %i, %i, %i]",
+//		ctrl.reserved1[5], ctrl.reserved1[6], ctrl.reserved1[7], ctrl.reserved1[8], ctrl.reserved1[9]);
 }
 
 bool isBtnClicked(uint data, uint dataPrev, uint btn){
