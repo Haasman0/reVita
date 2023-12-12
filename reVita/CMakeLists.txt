@@ -90,7 +90,7 @@ vita_create_self(${PROJECT_NAME}.skprx ${PROJECT_NAME}
   UNSAFE
   CONFIG export.yml
 )
-add_dependencies(${PROJECT_NAME}.skprx ${PROJECT_NAME})
+#add_dependencies(${PROJECT_NAME}.skprx ${PROJECT_NAME})
  
 vita_create_stubs(stubs ${PROJECT_NAME} export.yml KERNEL)
 
