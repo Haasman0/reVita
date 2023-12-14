@@ -263,6 +263,8 @@ void profile_resetTurbo(){
 	profile_resetEntryById(PR_TU_FAST);
 }
 void profile_resetAnalog(){
+	profile_resetEntryById(PR_AN_LEFT_BIND);
+	profile_resetEntryById(PR_AN_RIGHT_BIND);
 	profile_resetEntryById(PR_AN_LEFT_DEADZONE);
 	profile_resetEntryById(PR_AN_LEFT_DEADZONE_X);
 	profile_resetEntryById(PR_AN_LEFT_DEADZONE_Y);
@@ -676,6 +678,20 @@ void setDefProfile(){
 		.type = TYPE_BOOL,
 		.def.u = 1,
 		.key = "AnalogsWideMode"});
+	setPE((ProfileEntry){
+		.id = PR_AN_LEFT_BIND,
+		.type = TYPE_UINT32,
+		.def.u = 0,
+		.min.u = 0,
+		.max.u = 2,
+		.key = "LeftAnalogBind"});
+	setPE((ProfileEntry){
+		.id = PR_AN_RIGHT_BIND,
+		.type = TYPE_UINT32,
+		.def.u = 0,
+		.min.u = 0,
+		.max.u = 2,
+		.key = "RightAnalogBind"});
 	setPE((ProfileEntry){
 		.id = PR_AN_LEFT_DEADZONE,
 		.type = TYPE_BOOL,

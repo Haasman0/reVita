@@ -738,14 +738,76 @@ void applyRemap(SceCtrlData *ctrl, enum RULE_STATUS* statuses, bool* sticky, Sce
 	}
 
 	// Restoring propagated values for analog sticks
-	rd.analogLeftEmu.left += rd.analogLeftProp.left;
-	rd.analogLeftEmu.right += rd.analogLeftProp.right;
-	rd.analogLeftEmu.up += rd.analogLeftProp.up;
-	rd.analogLeftEmu.down += rd.analogLeftProp.down;
-	rd.analogRightEmu.left += rd.analogRightProp.left;
-	rd.analogRightEmu.right += rd.analogRightProp.right;
-	rd.analogRightEmu.up += rd.analogRightProp.up;
-	rd.analogRightEmu.down += rd.analogRightProp.down;
+	switch (profile.entries[PR_AN_LEFT_BIND].v.u) {
+		case 0:
+			switch (profile.entries[PR_AN_RIGHT_BIND].v.u) {
+				case 0:
+					rd.analogLeftEmu.left += rd.analogLeftProp.left;
+					rd.analogLeftEmu.right += rd.analogLeftProp.right;
+					rd.analogLeftEmu.up += rd.analogLeftProp.up;
+					rd.analogLeftEmu.down += rd.analogLeftProp.down;
+					rd.analogRightEmu.left += rd.analogRightProp.left;
+					rd.analogRightEmu.right += rd.analogRightProp.right;
+					rd.analogRightEmu.up += rd.analogRightProp.up;
+					rd.analogRightEmu.down += rd.analogRightProp.down;
+					break;
+				case 1:
+					rd.analogLeftEmu.left += (rd.analogLeftProp.left > rd.analogRightProp.left ? rd.analogLeftProp.left : rd.analogRightProp.left);
+					rd.analogLeftEmu.right += (rd.analogLeftProp.right > rd.analogRightProp.right ? rd.analogLeftProp.right : rd.analogRightProp.right);
+					rd.analogLeftEmu.up += (rd.analogLeftProp.up > rd.analogRightProp.up ? rd.analogLeftProp.up : rd.analogRightProp.up);
+					rd.analogLeftEmu.down += (rd.analogLeftProp.down > rd.analogRightProp.down ? rd.analogLeftProp.down : rd.analogRightProp.down);
+					break;
+				case 2:
+					rd.analogLeftEmu.left += rd.analogLeftProp.left;
+					rd.analogLeftEmu.right += rd.analogLeftProp.right;
+					rd.analogLeftEmu.up += rd.analogLeftProp.up;
+					rd.analogLeftEmu.down += rd.analogLeftProp.down;
+					break;
+			}
+			break;
+		case 1:
+			switch (profile.entries[PR_AN_RIGHT_BIND].v.u) {
+				case 0:
+					rd.analogRightEmu.left += (rd.analogLeftProp.left > rd.analogRightProp.left ? rd.analogLeftProp.left : rd.analogRightProp.left);
+					rd.analogRightEmu.right += (rd.analogLeftProp.right > rd.analogRightProp.right ? rd.analogLeftProp.right : rd.analogRightProp.right);
+					rd.analogRightEmu.up += (rd.analogLeftProp.up > rd.analogRightProp.up ? rd.analogLeftProp.up : rd.analogRightProp.up);
+					rd.analogRightEmu.down += (rd.analogLeftProp.down > rd.analogRightProp.down ? rd.analogLeftProp.down : rd.analogRightProp.down);
+					break;
+				case 1:
+					rd.analogLeftEmu.left += rd.analogRightProp.left;
+					rd.analogLeftEmu.right += rd.analogRightProp.right;
+					rd.analogLeftEmu.up += rd.analogRightProp.up;
+					rd.analogLeftEmu.down += rd.analogRightProp.down;
+					rd.analogRightEmu.left += rd.analogLeftProp.left;
+					rd.analogRightEmu.right += rd.analogLeftProp.right;
+					rd.analogRightEmu.up += rd.analogLeftProp.up;
+					rd.analogRightEmu.down += rd.analogLeftProp.down;
+					break;
+				case 2:
+					rd.analogRightEmu.left += rd.analogLeftProp.left;
+					rd.analogRightEmu.right += rd.analogLeftProp.right;
+					rd.analogRightEmu.up += rd.analogLeftProp.up;
+					rd.analogRightEmu.down += rd.analogLeftProp.down;
+					break;
+			}
+			break;
+		case 2:
+			switch (profile.entries[PR_AN_RIGHT_BIND].v.u) {
+				case 0:
+					rd.analogRightEmu.left += rd.analogRightProp.left;
+					rd.analogRightEmu.right += rd.analogRightProp.right;
+					rd.analogRightEmu.up += rd.analogRightProp.up;
+					rd.analogRightEmu.down += rd.analogRightProp.down;
+					break;
+				case 1:
+					rd.analogLeftEmu.left += rd.analogRightProp.left;
+					rd.analogLeftEmu.right += rd.analogRightProp.right;
+					rd.analogLeftEmu.up += rd.analogRightProp.up;
+					rd.analogLeftEmu.down += rd.analogRightProp.down;
+					break;
+			}
+			break;
+	}
 
 	// Storing remap for analog axises
 	ctrl->lx = clamp(127 + rd.analogLeftEmu.right 	- rd.analogLeftEmu.left + (rd.analogLeftEmu.right > 0), 	0, 255);
