@@ -7,16 +7,18 @@
 #include "../rendererv.h"
 #include "menu.h"
 
-char* STR_LS_BIND[3] = {
-		"$U=>$U",
-		"$U=>$u",
-		"$U=>$%"
+char* STR_LS_BIND[4] = {
+		"$U>$U",
+		"$U>$u",
+		"$U>$U$u",
+		"$U>$%"
 };
 
-char* STR_RS_BIND[3] = {
-		"$u=>$u",
-		"$u=>$U",
-		"$u=>$%"
+char* STR_RS_BIND[4] = {
+		"$u>$u",
+		"$u>$U",
+		"$u>$U$u",
+		"$u>$%"
 };
 
 void onButton_analog(uint32_t btn){

@@ -682,14 +682,14 @@ void setDefProfile(){
 		.type = TYPE_UINT32,
 		.def.u = 0,
 		.min.u = 0,
-		.max.u = 2,
+		.max.u = 3,
 		.key = "LeftAnalogBind"});
 	setPE((ProfileEntry){
 		.id = PR_AN_RIGHT_BIND,
 		.type = TYPE_UINT32,
 		.def.u = 0,
 		.min.u = 0,
-		.max.u = 2,
+		.max.u = 3,
 		.key = "RightAnalogBind"});
 	setPE((ProfileEntry){
 		.id = PR_AN_LEFT_DEADZONE,
