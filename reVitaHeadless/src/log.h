@@ -5,7 +5,7 @@
 #include <string.h>
 
 #define LOG_PREFIX " [reVita] "
-#define LOG_PATH "ux0:/log/"
+#define LOG_PATH "ur0:/log/"
 #define LOG_FILE LOG_PATH "reVita.txt"
 
 void log_reset(); 

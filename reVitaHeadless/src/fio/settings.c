@@ -11,7 +11,7 @@
 
 #define SECTION "SETTINGS"
 #define BUFFER_SIZE_SETTINGS (200 * sizeof(char)+ 0xfff) & ~0xfff
-#define PATH "ux0:/data/reVita"
+#define PATH "ur0:/data/reVita"
 #define NAME_SETTINGS "SETTINGS"
 #define EXT "INI"
 
